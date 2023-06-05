@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="w-75 m-auto">
+      {{ali}}
+      {% for article in articles %}
+      <a href="{% url 'article' article.id %}" style="text-decoration: none; color: inherit;">
+        <div class="row featurette border border-1 p-3 mt-5" style="background-color: #E1D9D1; direction: rtl !important;">
+          <div class="col-md-5">
+            <img class="img-fluid" src="{{ article.image.url }}" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          </div>
+          <div class="col-md-7">
+            <h2 class=" mt-1 mb-3"style="border-right: 2px solid;padding-right: 9px;text-align: justify;">{{article.title}} <span class="text-muted"></span></h2>
+            <p class="lead text-justify" style="text-align: justify;">{{article.content | slice:":600"}} ...</p>
+            <p class="text-secondary">{{article.author}}</p>            
+          </div>
+        </div>
+      </a>
+        <!-- <hr class="featurette-divider"> -->
+      {% endfor %}
+      <div class="row mt-5 m-auto" style="text-align: center;">
+        <div class="col-md-12">
+          {% if articles.has_other_pages %}
+          <ul class="pagination">
+            <!-- PREVIOUS PAGE -->
+            {% if articles.has_previous %}
+            <li class="page-item">
+              <a href="?page={{ articles.previous_page_number }}" class="page-link">&laquo;</a>
+            </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link">&laquo;</a>
+              </li>
+            {% endif %}
+            <!-- PAGE RANGE -->
+            {% for i in articles.paginator.page_range %}
+              {% if articles.number == i %}
+                <li class="page-item active">
+                  <a href="" class="page-link">{{ i }}</a>
+                </li>
+              {% else %}
+                <li class="page-item">
+                  <a href="?page={{i}}" class="page-link">{{ i }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            <!-- NEXT PAGE -->
+            {% if articles.has_next %}
+              <li class="page-item">
+                <a href="?page={{ articles.next_page_number }}" class="page-link">&raquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link">&raquo;</a>
+              </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>      
+      </div>
+{% endblock %}

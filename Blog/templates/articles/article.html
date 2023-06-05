@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="w-75 m-auto">
+    <div class="row featurette border border-1 p-3 mt-5" style="background-color: #E1D9D1; direction: rtl !important;">
+        
+        <div class="col-md-12">
+            <h2 class=" mt-1 mb-3"style="border-right: 2px solid;padding-right: 9px;text-align: justify;">{{article.title}} <span class="text-muted"></span></h2>
+            <span class="mb-1 rtl col-md-7" style="font-size: 15px;">{{article.author}}</span>
+            <img class="img-fluid pt-2 pb-5" src="{{ article.image.url }}" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <p class="lead text-justify" style="text-align: justify;">{{article.content}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
